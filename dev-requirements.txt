@@ -1,0 +1,11 @@
+cloudinary
+django-cors-headers
+django-extensions
+django-filter
+#django==4.1.1
+djangorestframework==3.12.0
+gunicorn
+pre-commit
+pylint
+pytest-django
+whitenoise
