@@ -1,0 +1,31 @@
+services:
+  web:
+    container_name: codebattles_backend
+    build:
+      context: .
+    commands: python /app/manage.py runserver 0.0.0.0:8000
+    ports:
+      - '8000:8000'
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+    volumes:
+      - .:/app:rw
+    healthcheck:
+      - test: curl 0.0.0.0:8000 || exit 1
+      - interval: 1m30s
+      - timeout: 40s
+      - retries: 3
+
+  db:
+    container_name: codebattles_db
+    image: postgres:14-bullseye
+    env_file:
+      -  ./.env
+    volumes:
+      - pg_data:/var/lib/postgresql/data/
+
+
+volumes:
+  - name: codebattles_db
